@@ -1,3 +1,4 @@
+import HomeContent from "../components/HomeContent";
 import Navbar from "../components/Navbar";
 import { useTheme } from "../utils/hooks";
 
@@ -11,6 +12,7 @@ export default function Home() {
     >
       <Navbar />
       <hr />
+      <HomeContent />
     </div>
   );
 }

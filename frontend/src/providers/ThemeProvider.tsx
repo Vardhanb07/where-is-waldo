@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { ThemeProviderPropTypes } from "../utils/types";
-import { ThemeContext } from "./ThemeContext";
+import { ThemeContext } from "../context/ThemeContext";
 
 export default function ThemeProvider({ children }: ThemeProviderPropTypes) {
   const initialTheme = localStorage.getItem("theme") || "light";
