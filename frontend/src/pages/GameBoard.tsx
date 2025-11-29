@@ -1,4 +1,4 @@
-import Navbar from "../components/Navbar";
+import GameNavbar from "../components/GameNavbar";
 import { useTheme } from "../utils/hooks";
 import ImageDisplay from "../components/ImageDisplay";
 import { useParams } from "react-router";
@@ -14,7 +14,7 @@ export default function GameBoard() {
 
   const imageId = parseInt(id);
 
-  if (imageId < 0 && imageId > 5) {
+  if (imageId < 1 || imageId > 5) {
     return <NoMatch />;
   }
 
@@ -24,7 +24,7 @@ export default function GameBoard() {
         theme === "dark" ? "bg-gray-950 text-white" : "bg-white text-black"
       } h-screen pt-2`}
     >
-      <Navbar />
+      <GameNavbar />
       <hr />
       <ImageDisplay imageId={imageId}/>
     </div>
