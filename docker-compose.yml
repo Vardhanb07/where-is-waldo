@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: "postgres:16"
+    container_name: where-is-waldo-db 
+    environment:
+      POSTGRES_DB: where_is_waldo 
+      POSTGRES_USER: postgres 
+      POSTGRES_PASSWORD: password 
+    ports:
+      - "5432:5432" 
+    volumes:
+      - local_pgdata:/var/lib/postgresql/data
+    restart: always
+volumes:
+  local_pgdata:
