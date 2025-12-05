@@ -4,6 +4,7 @@ import NoMatch from "./pages/NoMatch";
 import ThemeProvider from "./providers/ThemeProvider";
 import GameBoard from "./pages/GameBoard";
 import ImageProvider from "./providers/ImageProvider";
+import ImagesToBeFoundProvider from "./providers/ImagesToBeFoundProvider";
 
 export function AppRouter() {
   return (
@@ -19,9 +20,11 @@ export default function App() {
   return (
     <ThemeProvider>
       <ImageProvider>
-        <BrowserRouter>
-          <AppRouter />
-        </BrowserRouter>
+        <ImagesToBeFoundProvider>
+          <BrowserRouter>
+            <AppRouter />
+          </BrowserRouter>
+        </ImagesToBeFoundProvider>
       </ImageProvider>
     </ThemeProvider>
   );

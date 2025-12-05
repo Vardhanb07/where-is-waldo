@@ -24,7 +24,7 @@ export default function GameBoard() {
         theme === "dark" ? "bg-gray-950 text-white" : "bg-white text-black"
       } h-screen pt-2`}
     >
-      <GameNavbar />
+      <GameNavbar imageId={imageId}/>
       <hr />
       <ImageDisplay imageId={imageId}/>
     </div>

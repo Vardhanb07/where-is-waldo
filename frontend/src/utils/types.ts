@@ -12,5 +12,24 @@ export interface ImageProviderPropTypes {
 }
 
 export interface ImageDisplayPropTypes {
-  imageId: number
+  imageId: number;
+}
+
+export interface ImageTooltipPropTypes {
+  mousePosition: {
+    x: number;
+    y: number;
+  };
+}
+
+export interface GameNavbarPropTypes {
+  imageId: number;
+}
+
+export interface ImagesToBeFoundPropTypes {
+  parentImageId: number;
+}
+
+export interface ImageToBeFoundPropTypes {
+  image: string;
 }
