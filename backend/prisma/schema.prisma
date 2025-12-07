@@ -14,9 +14,21 @@ datasource db {
 }
 
 model Player {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  username  String   @unique @db.VarChar(64)
-  score     Int
+  id          Int           @id @default(autoincrement())
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  username    String        @db.VarChar(64)
+  score       Int
+  imageStatus ImageStatus[]
+}
+
+model ImageStatus {
+  id              Int      @id @default(autoincrement())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  snapOneStatus   Boolean  @default(false)
+  snapTwoStatus   Boolean  @default(false)
+  snapThreeStatus Boolean  @default(false)
+  player          Player?  @relation(fields: [playerId], references: [id])
+  playerId        Int?
 }
