@@ -1,19 +1,29 @@
 import express from "express";
 import type { Request, Response } from "express";
+import cors from "cors";
 import playerRouter from "./routes/playerRouter";
+import leaderboardRouter from "./routes/leaderboardRouter";
+import dotenv from "dotenv";
+
+dotenv.config({ quiet: true });
 
 const app = express();
 
+const corsOptions = {
+  origin: process.env.ORIGIN,
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req: Request, res: Response) => {
-  res.json({
-    message: "In-progress",
-  });
+  res.redirect("/player");
 });
 
 app.use("/player", playerRouter);
+app.use("/leaderboard", leaderboardRouter);
 
 app.use((req: Request, res: Response) => {
   res.status(404).json({

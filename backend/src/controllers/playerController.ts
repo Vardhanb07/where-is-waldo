@@ -23,25 +23,16 @@ async function sendPlayerData(req: Request, res: Response) {
 }
 
 async function addNewPlayer(req: Request, res: Response) {
-  const { username, score, imageStatus }: addNewPlayerBodyTypes = req.body;
+  let { username, score }: addNewPlayerBodyTypes = req.body;
+  if (score === undefined) score = 0;
   const { id } = await client.player.create({
     data: {
       username: username,
       score: score,
     },
   });
-  for (const image of imageStatus) {
-    await client.imageStatus.create({
-      data: {
-        snapOneStatus: image.snapOneStatus,
-        snapThreeStatus: image.snapTwoStatus,
-        snapTwoStatus: image.snapThreeStatus,
-        playerId: id,
-      },
-    });
-  }
   res.status(201).json({
-    message: "player created!",
+    playerId: id,
   });
 }
 
