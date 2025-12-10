@@ -5,12 +5,24 @@ import ThemeProvider from "./providers/ThemeProvider";
 import GameBoard from "./pages/GameBoard";
 import ImageProvider from "./providers/ImageProvider";
 import ImagesToBeFoundProvider from "./providers/ImagesToBeFoundProvider";
+import Leaderboard from "./pages/Leaderboard";
+import ProtectRoute from "./components/ProtectRoute";
+import Register from "./pages/Register";
 
 export function AppRouter() {
   return (
     <Routes>
       <Route index element={<Home />} />
-      <Route path="image/:id" element={<GameBoard />} />
+      <Route path="register" element={<Register />} />
+      <Route
+        path="image/:id"
+        element={
+          <ProtectRoute>
+            <GameBoard />
+          </ProtectRoute>
+        }
+      />
+      <Route path="leaderboard" element={<Leaderboard />} />
       <Route path="*" element={<NoMatch />} />
     </Routes>
   );

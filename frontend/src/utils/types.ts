@@ -33,3 +33,7 @@ export interface ImagesToBeFoundPropTypes {
 export interface ImageToBeFoundPropTypes {
   image: string;
 }
+
+export interface ProtectRoutePropTypes {
+  children: React.ReactElement
+}
