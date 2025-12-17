@@ -31,7 +31,7 @@ export default function GameNavbar({ imageId }: GameNavbarPropTypes) {
     }, 1000);
   }, [hours, minutes, seconds]);
   return (
-    <nav className="flex flex-row w-screen mb-2 p-3 text-2xl font-jbmono">
+    <nav className="flex-1 flex flex-row mb-2 p-3 text-2xl font-jbmono">
       <Link to="/" className="flex-3 flex justify-start items-center">
         Where's waldo
       </Link>

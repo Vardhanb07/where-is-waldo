@@ -22,7 +22,7 @@ export default function GameBoard() {
     <div
       className={`${
         theme === "dark" ? "bg-gray-950 text-white" : "bg-white text-black"
-      } h-screen pt-2`}
+      } h-full pt-2 flex flex-col w-full`}
     >
       <GameNavbar imageId={imageId}/>
       <hr />

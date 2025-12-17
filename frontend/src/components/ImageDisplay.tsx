@@ -12,23 +12,34 @@ export default function ImageDisplay({ imageId }: ImageDisplayPropTypes) {
     y: 0,
   });
   return (
-    <div
-      onClick={() => {
-        setShowTooltip(true);
-      }}
-      onMouseMove={(e) => {
-        setMousePosition({
-          ...mousePosition,
-          x: e.pageX - 15,
-          y: e.pageY - 15,
-        });
-      }}
-      onMouseLeave={() => {
-        setShowTooltip(false);
-      }}
-    >
-      <img src={image} alt="game-image" />
-      {showTooltip && <ImageTooltip mousePosition={mousePosition} />}
+    <div className="flex-3 p-10">
+      <div
+        onClick={() => {
+          setShowTooltip(true);
+        }}
+        onMouseMove={(e) => {
+          setMousePosition({
+            ...mousePosition,
+            x: e.pageX - 15,
+            y: e.pageY - 15,
+          });
+        }}
+        onMouseLeave={() => {
+          setShowTooltip(false);
+        }}
+        className="flex h-full justify-center items-center"
+      >
+        <img
+          src={image}
+          alt="game-image"
+          style={{
+            width: `${window.innerWidth - 130}px`,
+            height: `${window.innerHeight - 130}px`,
+          }}
+          className=""
+        />
+        {showTooltip && <ImageTooltip mousePosition={mousePosition} />}
+      </div>
     </div>
   );
 }

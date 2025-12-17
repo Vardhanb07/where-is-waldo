@@ -5,6 +5,7 @@ import { useTheme } from "../utils/hooks";
 
 export default function Navbar() {
   const { theme, changeTheme } = useTheme();
+  const playerId = localStorage.getItem("playerId");
   return (
     <nav className="flex flex-row w-screen mb-2 p-3 text-2xl font-jbmono">
       <Link to="/" className="flex-2">
@@ -13,6 +14,11 @@ export default function Navbar() {
       <button className="flex-1 text-center">
         <Link to="/leaderboard">Leaderboard</Link>
       </button>
+      {!playerId && (
+        <button className="flex-1 text-center">
+          <Link to="/register">Register</Link>
+        </button>
+      )}
       <div
         className="flex-1 flex justify-center items-center cursor-pointer"
         onClick={() => {
