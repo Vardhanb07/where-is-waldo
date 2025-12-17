@@ -3,12 +3,12 @@ import type { ProtectRoutePropTypes } from "../utils/types";
 import { useEffect } from "react";
 
 export default function ProtectRoute({ children }: ProtectRoutePropTypes) {
-  const playerId = localStorage.getItem("playerId");
-  const navigate  = useNavigate()
+  const playerToken = localStorage.getItem("player-token");
+  const navigate = useNavigate();
   useEffect(() => {
-    if(playerId === null) {
-      navigate("/register")
+    if (playerToken === null) {
+      navigate("/register");
     }
-  }, [playerId])
+  }, [playerToken]);
   return children;
 }

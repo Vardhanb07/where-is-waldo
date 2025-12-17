@@ -7,7 +7,9 @@ export default function Home() {
   return (
     <div
       className={`${
-        theme === "dark" ? "bg-gray-950 text-white" : "bg-white text-black"
+        theme === "dark"
+          ? "bg-gray-950 text-white selection:text-black selection:bg-white"
+          : "bg-white text-black selection:text-white selection:bg-black"
       } h-screen pt-2`}
     >
       <Navbar />

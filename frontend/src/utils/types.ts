@@ -35,5 +35,11 @@ export interface ImageToBeFoundPropTypes {
 }
 
 export interface ProtectRoutePropTypes {
-  children: React.ReactElement
+  children: React.ReactElement;
+}
+
+export interface PopupPropTypes {
+  content: string;
+  showPopup: boolean;
+  setShowPopup: React.Dispatch<React.SetStateAction<boolean>>;
 }

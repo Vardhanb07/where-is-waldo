@@ -7,7 +7,9 @@ export default function Register() {
   return (
     <div
       className={`${
-        theme === "dark" ? "bg-gray-950 text-white" : "bg-white text-black"
+        theme === "dark"
+          ? "bg-gray-950 text-white selection:bg-white selection:text-black"
+          : "bg-white text-black selection:bg-black selection:text-white"
       } h-screen pt-2`}
     >
       <Navbar />

@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import instance from "../utils/api";
+import Popup from "./Popup";
 
 export default function RegisterContent() {
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
+  const [showPopup, setShowPopup] = useState(false);
+  const [error, setError] = useState("");
   return (
     <div className="font-jbmono text-2xl">
       <h1 className="text-center mt-3 mb-4">
@@ -14,11 +17,16 @@ export default function RegisterContent() {
         className="flex flex-col justify-center items-center gap-5"
         onSubmit={async (e) => {
           e.preventDefault();
-          const response = await instance.post("/player", {
-            username: username,
-          });
-          localStorage.setItem("playerId", response.data.playerId);
-          navigate("/");
+          try {
+            const response = await instance.post("/player", {
+              username: username,
+            });
+            localStorage.setItem("player-token", response.data.playerToken);
+            navigate("/");
+          } catch (e) {
+            setShowPopup(true);
+            setError("Seems an error has occurred with api!");
+          }
         }}
       >
         <div className="flex flex-col gap-1">
@@ -38,6 +46,13 @@ export default function RegisterContent() {
           Submit
         </button>
       </form>
+      {showPopup && (
+        <Popup
+          content={error}
+          showPopup={showPopup}
+          setShowPopup={setShowPopup}
+        />
+      )}
     </div>
   );
 }

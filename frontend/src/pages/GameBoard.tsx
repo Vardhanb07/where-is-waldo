@@ -21,12 +21,14 @@ export default function GameBoard() {
   return (
     <div
       className={`${
-        theme === "dark" ? "bg-gray-950 text-white" : "bg-white text-black"
+        theme === "dark"
+          ? "bg-gray-950 text-white selection:bg-white selection:text-black"
+          : "bg-white text-black selection:bg-black selection:text-white"
       } h-full pt-2 flex flex-col w-full`}
     >
-      <GameNavbar imageId={imageId}/>
+      <GameNavbar imageId={imageId} />
       <hr />
-      <ImageDisplay imageId={imageId}/>
+      <ImageDisplay imageId={imageId} />
     </div>
   );
 }

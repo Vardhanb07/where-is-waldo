@@ -5,7 +5,7 @@ export default function NoMatch() {
         404
       </h1>
       <div className="flex-4 flex flex-col items-center gap-0.5 text-2xl">
-        <p>Error Occured! Page could not be found.</p>
+        <p>Error Occurred! Page could not be found.</p>
         <p>Please check URL and try again.</p>
       </div>
     </div>

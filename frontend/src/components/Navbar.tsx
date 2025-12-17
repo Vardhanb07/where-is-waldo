@@ -5,7 +5,7 @@ import { useTheme } from "../utils/hooks";
 
 export default function Navbar() {
   const { theme, changeTheme } = useTheme();
-  const playerId = localStorage.getItem("playerId");
+  const playerId = localStorage.getItem("player-token");
   return (
     <nav className="flex flex-row w-screen mb-2 p-3 text-2xl font-jbmono">
       <Link to="/" className="flex-2">
