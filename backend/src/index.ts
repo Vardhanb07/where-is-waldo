@@ -1,5 +1,5 @@
-import app from "./app.js"
+import { server } from "./socket";
 
-app.listen(8000, () => {
-  console.log("localhost: http://localhost:8000/")
-})
+server.listen(8000, () => {
+  console.log("localhost: http://localhost:8000/");
+});

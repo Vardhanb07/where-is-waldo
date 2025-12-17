@@ -9,7 +9,7 @@ dotenv.config({ quiet: true });
 
 const app = express();
 
-const corsOptions = {
+export const corsOptions = {
   origin: process.env.ORIGIN,
   optionsSuccessStatus: 200,
 };
