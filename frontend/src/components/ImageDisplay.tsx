@@ -14,9 +14,7 @@ export default function ImageDisplay({ imageId }: ImageDisplayPropTypes) {
   return (
     <div className="flex-3 p-10">
       <div
-        onClick={() => {
-          setShowTooltip(true);
-        }}
+        className="flex h-full justify-center items-center"
         onMouseMove={(e) => {
           setMousePosition({
             ...mousePosition,
@@ -24,10 +22,6 @@ export default function ImageDisplay({ imageId }: ImageDisplayPropTypes) {
             y: e.pageY - 15,
           });
         }}
-        onMouseLeave={() => {
-          setShowTooltip(false);
-        }}
-        className="flex h-full justify-center items-center"
       >
         <img
           src={image}
@@ -36,7 +30,12 @@ export default function ImageDisplay({ imageId }: ImageDisplayPropTypes) {
             width: `${window.innerWidth - 130}px`,
             height: `${window.innerHeight - 130}px`,
           }}
-          className=""
+          onMouseEnter={() => {
+            setShowTooltip(true);
+          }}
+          onMouseLeave={() => {
+            setShowTooltip(false);
+          }}
         />
         {showTooltip && <ImageTooltip mousePosition={mousePosition} />}
       </div>
