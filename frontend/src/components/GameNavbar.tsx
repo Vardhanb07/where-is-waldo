@@ -31,29 +31,32 @@ export default function GameNavbar({ imageId }: GameNavbarPropTypes) {
     }, 1000);
   }, [hours, minutes, seconds]);
   return (
-    <nav className="flex-1 flex flex-row mb-2 p-3 text-2xl font-jbmono">
-      <Link to="/" className="flex-3 flex justify-start items-center">
-        Where's waldo
-      </Link>
-      <div className="flex-2 flex gap-2 items-center">
-        <p>Find: </p>
-        <ImagesToBeFound parentImageId={imageId} />
-      </div>
-      <p className="flex-2 flex justify-center items-center">
-        Time elapsed: {hours}:{minutes}:{seconds}
-      </p>
-      <div
-        className="flex-1 flex justify-center items-center cursor-pointer"
-        onClick={() => {
-          changeTheme();
-        }}
-      >
-        {theme === "light" ? (
-          <img src={darkModeImage} alt="dark-mode-image" />
-        ) : (
-          <img src={lightModeImage} alt="light-mode-image" />
-        )}
-      </div>
-    </nav>
+    <div>
+      <nav className="flex-1 flex flex-row mb-2 p-3 text-2xl font-jbmono">
+        <Link to="/" className="flex-3 flex justify-start items-center">
+          Where's waldo
+        </Link>
+        <div className="flex-2 flex gap-2 items-center">
+          <p>Find: </p>
+          <ImagesToBeFound parentImageId={imageId} />
+        </div>
+        <p className="flex-2 flex justify-center items-center">
+          Time elapsed: {hours}:{minutes}:{seconds}
+        </p>
+        <div
+          className="flex-1 flex justify-center items-center cursor-pointer"
+          onClick={() => {
+            changeTheme();
+          }}
+        >
+          {theme === "light" ? (
+            <img src={darkModeImage} alt="dark-mode-image" />
+          ) : (
+            <img src={lightModeImage} alt="light-mode-image" />
+          )}
+        </div>
+      </nav>
+      <hr />
+    </div>
   );
 }

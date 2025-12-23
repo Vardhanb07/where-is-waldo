@@ -13,7 +13,6 @@ export default function Home() {
       } h-screen pt-2`}
     >
       <Navbar />
-      <hr />
       <HomeContent />
     </div>
   );

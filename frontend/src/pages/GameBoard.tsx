@@ -27,7 +27,6 @@ export default function GameBoard() {
       } h-full pt-2 flex flex-col w-full`}
     >
       <GameNavbar imageId={imageId} />
-      <hr />
       <ImageDisplay imageId={imageId} />
     </div>
   );
