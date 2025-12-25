@@ -5,6 +5,7 @@ export default function Popup({
   content,
   showPopup,
   setShowPopup,
+  className,
 }: PopupPropTypes) {
   useEffect(() => {
     if (showPopup) {
@@ -14,7 +15,9 @@ export default function Popup({
     }
   }, []);
   return (
-    <div className="absolute right-1/10 bottom-1/7 border p-4 text-xl">
+    <div
+      className={`fixed right-1/10 bottom-1/7 border p-4 text-xl ${className}`}
+    >
       <p>{content}</p>
     </div>
   );

@@ -6,7 +6,7 @@ export function checkPositions(
   xPosition: number,
   yPosition: number
 ): boolean {
-  const { x, y } = positions[imageId][toFindImageId];
+  const { x, y } = positions[imageId][toFindImageId + 1];
   return (
     x - 30 <= xPosition &&
     xPosition <= x + 30 &&

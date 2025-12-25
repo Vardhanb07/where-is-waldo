@@ -11,6 +11,7 @@ export default function GamePopup({
   className,
   imageId,
   mousePosition,
+  setShowIncorrectMatchPopup,
 }: GamePopupPropTypes) {
   const { getImagesToBeFound } = useGetImagesToBeFound();
   const toFindImages = getImagesToBeFound(imageId);
@@ -35,7 +36,10 @@ export default function GamePopup({
               onClick={() => {
                 if (checkPositions(imageId, index, x, y)) {
                   incrementScore();
+                } else {
+                  setShowIncorrectMatchPopup(true);
                 }
+                setShowGamePopup(false);
               }}
             />
           );

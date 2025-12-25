@@ -10,7 +10,6 @@ export default function Leaderboard() {
       } h-screen pt-2`}
     >
       <Navbar />
-      <hr />
     </div>
   );
 }

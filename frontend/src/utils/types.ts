@@ -54,6 +54,7 @@ export interface PopupPropTypes {
   content: string;
   showPopup: boolean;
   setShowPopup: React.Dispatch<React.SetStateAction<boolean>>;
+  className?: string;
 }
 
 export interface GamePopupPropTypes {
@@ -65,6 +66,7 @@ export interface GamePopupPropTypes {
     x: number;
     y: number;
   };
+  setShowIncorrectMatchPopup: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface PositionsType {

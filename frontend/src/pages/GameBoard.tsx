@@ -5,6 +5,7 @@ import { useParams } from "react-router";
 import NoMatch from "./NoMatch";
 import { useState } from "react";
 import GamePopup from "../components/GamePopup";
+import Popup from "../components/Popup";
 
 export default function GameBoard() {
   const { theme } = useTheme();
@@ -25,6 +26,7 @@ export default function GameBoard() {
     x: 0,
     y: 0,
   });
+  const [showIncorrectMatchPopup, setShowIncorrectMatchPopup] = useState(false);
 
   return (
     <div
@@ -52,6 +54,19 @@ export default function GameBoard() {
           setShowGamePopup={setShowGamePopup}
           imageId={imageId}
           mousePosition={mousePosition}
+          setShowIncorrectMatchPopup={setShowIncorrectMatchPopup}
+        />
+      )}
+      {showIncorrectMatchPopup && (
+        <Popup
+          content="Incorrect match!"
+          showPopup={showIncorrectMatchPopup}
+          setShowPopup={setShowIncorrectMatchPopup}
+          className={`${
+            theme === "dark"
+              ? "bg-gray-950 text-white selection:bg-white selection:text-black"
+              : "bg-white text-black selection:bg-black selection:text-white"
+          } font-jbmono`}
         />
       )}
     </div>
