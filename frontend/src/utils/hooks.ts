@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 import { ImageContext } from "../context/ImageContext";
 import { ImagesToBeFoundContext } from "../context/ImagesToBeFoundContext";
+import { ScoreContext } from "../context/ScoreContext";
 
 export function useTheme() {
   const context = useContext(ThemeContext);
@@ -15,5 +16,10 @@ export function useGetImage() {
 
 export function useGetImagesToBeFound() {
   const context = useContext(ImagesToBeFoundContext);
+  return context;
+}
+
+export function useScore() {
+  const context = useContext(ScoreContext);
   return context;
 }

@@ -1,11 +1,12 @@
 import { Link } from "react-router";
 import darkModeImage from "../assets/images/theme-images/dark_mode.svg";
 import lightModeImage from "../assets/images/theme-images/light_mode.svg";
-import { useTheme } from "../utils/hooks";
+import { useTheme, useScore } from "../utils/hooks";
 
 export default function Navbar() {
   const { theme, changeTheme } = useTheme();
   const playerId = localStorage.getItem("player-token");
+  const { score } = useScore();
   return (
     <div>
       <nav className="flex flex-row w-screen mb-2 p-3 text-2xl font-jbmono">
@@ -20,6 +21,9 @@ export default function Navbar() {
             <Link to="/register">Register</Link>
           </button>
         )}
+        <div>
+          <p>Score: {score}</p>
+        </div>
         <div
           className="flex-1 flex justify-center items-center cursor-pointer"
           onClick={() => {

@@ -41,7 +41,8 @@ export default function GameNavbar({ imageId }: GameNavbarPropTypes) {
           <ImagesToBeFound parentImageId={imageId} />
         </div>
         <p className="flex-2 flex justify-center items-center">
-          Time elapsed: {hours}:{minutes}:{seconds}
+          Time elapsed: {String(hours).padStart(2, "0")}:
+          {String(minutes).padStart(2, "0")}:{String(seconds).padStart(2, "0")}
         </p>
         <div
           className="flex-1 flex justify-center items-center cursor-pointer"

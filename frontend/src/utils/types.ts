@@ -13,6 +13,17 @@ export interface ImageProviderPropTypes {
 
 export interface ImageDisplayPropTypes {
   imageId: number;
+  setShowGamePopup: React.Dispatch<React.SetStateAction<boolean>>;
+  mousePosition: {
+    x: number;
+    y: number;
+  };
+  setMousePosition: React.Dispatch<
+    React.SetStateAction<{
+      x: number;
+      y: number;
+    }>
+  >;
 }
 
 export interface ImageTooltipPropTypes {
@@ -32,6 +43,7 @@ export interface ImagesToBeFoundPropTypes {
 
 export interface ImageToBeFoundPropTypes {
   image: string;
+  onClick?: () => void;
 }
 
 export interface ProtectRoutePropTypes {
@@ -42,4 +54,28 @@ export interface PopupPropTypes {
   content: string;
   showPopup: boolean;
   setShowPopup: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface GamePopupPropTypes {
+  showGamePopup: boolean;
+  setShowGamePopup: React.Dispatch<React.SetStateAction<boolean>>;
+  className?: string;
+  imageId: number;
+  mousePosition: {
+    x: number;
+    y: number;
+  };
+}
+
+export interface PositionsType {
+  [index: number]: {
+    [index: number]: {
+      x: number;
+      y: number;
+    };
+  };
+}
+
+export interface ScoreProviderPropTypes {
+  children: React.ReactNode;
 }

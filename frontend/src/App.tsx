@@ -8,6 +8,7 @@ import ImagesToBeFoundProvider from "./providers/ImagesToBeFoundProvider";
 import Leaderboard from "./pages/Leaderboard";
 import ProtectRoute from "./components/ProtectRoute";
 import Register from "./pages/Register";
+import ScoreProvider from "./providers/ScoreProvider";
 
 export function AppRouter() {
   return (
@@ -33,9 +34,11 @@ export default function App() {
     <ThemeProvider>
       <ImageProvider>
         <ImagesToBeFoundProvider>
-          <BrowserRouter>
-            <AppRouter />
-          </BrowserRouter>
+          <ScoreProvider>
+            <BrowserRouter>
+              <AppRouter />
+            </BrowserRouter>
+          </ScoreProvider>
         </ImagesToBeFoundProvider>
       </ImageProvider>
     </ThemeProvider>

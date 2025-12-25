@@ -3,14 +3,15 @@ import { useGetImage } from "../utils/hooks";
 import { useState } from "react";
 import ImageTooltip from "./ImageTooltip";
 
-export default function ImageDisplay({ imageId }: ImageDisplayPropTypes) {
+export default function ImageDisplay({
+  imageId,
+  setShowGamePopup,
+  mousePosition,
+  setMousePosition,
+}: ImageDisplayPropTypes) {
   const { getImage } = useGetImage();
   const image = getImage(imageId);
   const [showTooltip, setShowTooltip] = useState(false);
-  const [mousePosition, setMousePosition] = useState({
-    x: 0,
-    y: 0,
-  });
   return (
     <div className="flex-3 p-10">
       <div
@@ -22,21 +23,17 @@ export default function ImageDisplay({ imageId }: ImageDisplayPropTypes) {
             y: e.pageY - 15,
           });
         }}
+        onMouseEnter={() => {
+          setShowTooltip(true);
+        }}
+        onMouseLeave={() => {
+          setShowTooltip(false);
+        }}
+        onClick={() => {
+          setShowGamePopup(true);
+        }}
       >
-        <img
-          src={image}
-          alt="game-image"
-          style={{
-            width: `${window.innerWidth - 130}px`,
-            height: `${window.innerHeight - 130}px`,
-          }}
-          onMouseEnter={() => {
-            setShowTooltip(true);
-          }}
-          onMouseLeave={() => {
-            setShowTooltip(false);
-          }}
-        />
+        <img src={image} alt="game-image" />
         {showTooltip && <ImageTooltip mousePosition={mousePosition} />}
       </div>
     </div>

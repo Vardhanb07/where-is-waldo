@@ -13,7 +13,6 @@ export default function Register() {
       } h-screen pt-2`}
     >
       <Navbar />
-      <hr />
       <RegisterContent />
     </div>
   );
