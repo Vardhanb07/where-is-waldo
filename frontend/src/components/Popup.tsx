@@ -24,7 +24,7 @@ export default function Popup({
     >
       <div className="flex flex-row gap-3 items-center">
         <div
-          className="flex h-8 w-8 cursor-pointer"
+          className="flex h-8 w-8 cursor-pointer hover:border"
           onClick={() => {
             setShowPopup(false);
           }}

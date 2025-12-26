@@ -11,12 +11,12 @@ export default function GamePopup({
   setShowGamePopup,
   className,
   imageId,
-  mousePosition,
   setShowIncorrectMatchPopup,
+  mouseClickPosition
 }: GamePopupPropTypes) {
   const { getImagesToBeFound } = useGetImagesToBeFound();
   const toFindImages = getImagesToBeFound(imageId);
-  const { x, y } = mousePosition;
+  const { x, y } = mouseClickPosition;
   const { incrementScore } = useScore();
   const { theme } = useTheme();
   useEffect(() => {
@@ -30,7 +30,7 @@ export default function GamePopup({
     <div className={`fixed right-3/7 top-1/9 border p-4 text-xl ${className}`}>
       <div className="flex flex-row gap-3 items-center mb-1">
         <div
-          className="flex h-8 w-8 cursor-pointer"
+          className="flex h-8 w-8 cursor-pointer hover:border"
           onClick={() => {
             setShowGamePopup(false);
           }}
@@ -50,6 +50,8 @@ export default function GamePopup({
               image={src}
               key={index}
               onClick={() => {
+                console.log("component: GamePopup");
+                console.log(`x: ${x}, y: ${y}`);
                 if (checkPositions(imageId, index, x, y)) {
                   incrementScore();
                 } else {
@@ -57,6 +59,7 @@ export default function GamePopup({
                 }
                 setShowGamePopup(false);
               }}
+              className="hover:border-2"
             />
           );
         })}

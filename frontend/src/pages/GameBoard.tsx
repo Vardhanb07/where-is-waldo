@@ -22,12 +22,11 @@ export default function GameBoard() {
   }
 
   const [showGamePopup, setShowGamePopup] = useState(false);
-  const [mousePosition, setMousePosition] = useState({
+  const [showIncorrectMatchPopup, setShowIncorrectMatchPopup] = useState(false);
+  const [mouseClickPosition, setMouseClickPosition] = useState({
     x: 0,
     y: 0,
   });
-  const [showIncorrectMatchPopup, setShowIncorrectMatchPopup] = useState(false);
-
   return (
     <div
       className={`${
@@ -40,8 +39,8 @@ export default function GameBoard() {
       <ImageDisplay
         imageId={imageId}
         setShowGamePopup={setShowGamePopup}
-        mousePosition={mousePosition}
-        setMousePosition={setMousePosition}
+        mouseClickPosition={mouseClickPosition}
+        setMouseClickPosition={setMouseClickPosition}
       />
       {showGamePopup && (
         <GamePopup
@@ -53,8 +52,8 @@ export default function GameBoard() {
           showGamePopup={showGamePopup}
           setShowGamePopup={setShowGamePopup}
           imageId={imageId}
-          mousePosition={mousePosition}
           setShowIncorrectMatchPopup={setShowIncorrectMatchPopup}
+          mouseClickPosition={mouseClickPosition}
         />
       )}
       {showIncorrectMatchPopup && (

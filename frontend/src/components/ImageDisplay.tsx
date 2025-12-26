@@ -6,12 +6,16 @@ import ImageTooltip from "./ImageTooltip";
 export default function ImageDisplay({
   imageId,
   setShowGamePopup,
-  mousePosition,
-  setMousePosition,
+  mouseClickPosition,
+  setMouseClickPosition,
 }: ImageDisplayPropTypes) {
   const { getImage } = useGetImage();
   const image = getImage(imageId);
   const [showTooltip, setShowTooltip] = useState(false);
+  const [mousePosition, setMousePosition] = useState({
+    x: 0,
+    y: 0,
+  });
   return (
     <div className="flex-3 p-10">
       <div
@@ -29,7 +33,14 @@ export default function ImageDisplay({
         onMouseLeave={() => {
           setShowTooltip(false);
         }}
-        onClick={() => {
+        onClick={(e) => {
+          console.log("component: ImageDisplay");
+          console.log(`x: ${e.pageX}, y: ${e.pageY}`);
+          setMouseClickPosition({
+            ...mouseClickPosition,
+            x: e.pageX,
+            y: e.pageY,
+          });
           setShowGamePopup(true);
         }}
       >

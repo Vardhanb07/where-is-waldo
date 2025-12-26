@@ -11,7 +11,7 @@ export default function ImagePreview({ imageName, id }: ImagePreviewPropTypes) {
     <div
       className={`flex flex-row px-4 py-2 w-full border ${
         theme === "dark" ? "border-white" : "border-black"
-      } m-2`}
+      } m-2 hover:border-2`}
       onClick={() => {
         navigate(`/image/${id}`);
       }}

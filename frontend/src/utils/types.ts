@@ -14,11 +14,11 @@ export interface ImageProviderPropTypes {
 export interface ImageDisplayPropTypes {
   imageId: number;
   setShowGamePopup: React.Dispatch<React.SetStateAction<boolean>>;
-  mousePosition: {
+  mouseClickPosition: {
     x: number;
     y: number;
   };
-  setMousePosition: React.Dispatch<
+  setMouseClickPosition: React.Dispatch<
     React.SetStateAction<{
       x: number;
       y: number;
@@ -44,6 +44,7 @@ export interface ImagesToBeFoundPropTypes {
 export interface ImageToBeFoundPropTypes {
   image: string;
   onClick?: () => void;
+  className?: string;
 }
 
 export interface ProtectRoutePropTypes {
@@ -62,11 +63,11 @@ export interface GamePopupPropTypes {
   setShowGamePopup: React.Dispatch<React.SetStateAction<boolean>>;
   className?: string;
   imageId: number;
-  mousePosition: {
+  setShowIncorrectMatchPopup: React.Dispatch<React.SetStateAction<boolean>>;
+  mouseClickPosition: {
     x: number;
     y: number;
   };
-  setShowIncorrectMatchPopup: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface PositionsType {
