@@ -2,12 +2,19 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import instance from "../utils/api";
 import Popup from "./Popup";
+import * as z from "zod";
 
 export default function RegisterContent() {
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
   const [error, setError] = useState("");
+  const responseSchema = z.object({
+    playerToken: z.string().min(1),
+  });
+  const formSchema = z.object({
+    playerUsername: z.string().min(1),
+  });
   return (
     <div className="font-jbmono text-2xl">
       <h1 className="text-center mt-3 mb-4">
@@ -18,14 +25,18 @@ export default function RegisterContent() {
         onSubmit={async (e) => {
           e.preventDefault();
           try {
-            const response = await instance.post("/player", {
-              username: username,
+            const { playerUsername } = formSchema.parse({
+              playerUsername: username,
             });
-            localStorage.setItem("player-token", response.data.playerToken);
+            const response = await instance.post("/player", {
+              username: playerUsername,
+            });
+            const { playerToken } = responseSchema.parse(response.data);
+            localStorage.setItem("player-token", playerToken);
             navigate("/");
-          } catch (e) {
+          } catch (err: unknown) {
             setShowPopup(true);
-            setError("Seems an error has occurred with api!");
+            setError("Please try again!");
           }
         }}
       >

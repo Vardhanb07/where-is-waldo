@@ -21,9 +21,11 @@ export default function Navbar() {
             <Link to="/register">Register</Link>
           </button>
         )}
-        <div>
-          <p>Score: {score}</p>
-        </div>
+        {playerId && (
+          <div>
+            <p>Score: {score}</p>
+          </div>
+        )}
         <div
           className="flex-1 flex justify-center items-center cursor-pointer"
           onClick={() => {
