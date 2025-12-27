@@ -1,5 +1,5 @@
 import express from "express";
-import type { Request, Response } from "express";
+import type { NextFunction, Request, Response } from "express";
 import cors from "cors";
 import playerRouter from "./routes/playerRouter";
 import leaderboardRouter from "./routes/leaderboardRouter";
@@ -29,6 +29,11 @@ app.use((req: Request, res: Response) => {
   res.status(404).json({
     message: "resource not found",
   });
+});
+
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  console.log(err.stack);
+  res.status(500).json({ message: "Something went wrong!" });
 });
 
 export default app;
