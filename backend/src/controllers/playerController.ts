@@ -8,7 +8,7 @@ import * as z from "zod";
 dotenv.config({ quiet: true });
 
 const envSchema = z.object({
-  key: z.string().min(1),
+  JWT_KEY: z.string().min(1),
 });
 
 async function sendAllPlayersData(req: Request, res: Response) {
@@ -49,11 +49,22 @@ async function addNewPlayer(req: Request, res: Response) {
       },
     });
   }
-  const { key } = envSchema.parse(process.env);
-  const playerToken = jwt.sign({ player: player }, key);
+  const { JWT_KEY } = envSchema.parse(process.env);
+  const playerToken = jwt.sign({ player: player }, JWT_KEY);
   res.json({
     playerToken: playerToken,
   });
 }
 
-export { sendAllPlayersData, sendPlayerData, addNewPlayer };
+async function updatePlayerProcess(req: Request, res: Response) {
+  res.json({
+    player: res.locals.player,
+  });
+}
+
+export {
+  sendAllPlayersData,
+  sendPlayerData,
+  addNewPlayer,
+  updatePlayerProcess,
+};
