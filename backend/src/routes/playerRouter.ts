@@ -17,6 +17,6 @@ playerRouter.use(protect);
 playerRouter.use(parse);
 playerRouter.get("/", asyncHandler(sendAllPlayersData));
 playerRouter.get("/:id", asyncHandler(sendPlayerData));
-playerRouter.post("/:id", asyncHandler(updatePlayerProcess));
+playerRouter.put("/", asyncHandler(updatePlayerProcess));
 
 export default playerRouter;

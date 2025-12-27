@@ -41,6 +41,7 @@ async function addNewPlayer(req: Request, res: Response) {
   });
   const playerId = player["id"];
   const numberOfImages = 3;
+  const numberOfSnaps = 3;
   for (let i = 1; i <= numberOfImages; i++) {
     await client.imageStatus.create({
       data: {
@@ -56,9 +57,46 @@ async function addNewPlayer(req: Request, res: Response) {
   });
 }
 
+const playerSchema = z.object({
+  id: z.number(),
+  username: z.string().min(1),
+  score: z.number().gte(0),
+});
+
+const resLocalsSchema = z.object({
+  player: playerSchema,
+});
+
 async function updatePlayerProcess(req: Request, res: Response) {
+  const { player } = resLocalsSchema.parse(res.locals);
+  const { id } = playerSchema.parse(player);
+  const reqBodySchema = z.object({
+    score: z.number().gte(0),
+    imageId: z.number().gte(0).lte(3),
+    snapId: z.number().gte(0).lte(3),
+  });
+  const { score, imageId, snapId } = reqBodySchema.parse(req.body);
+  await client.player.update({
+    where: {
+      id: id,
+    },
+    data: {
+      score: score,
+    },
+  });
+  await client.imageStatus.update({
+    where: {
+      playerId_imageId: {
+        playerId: id,
+        imageId: imageId,
+      },
+    },
+    data: {
+      snapId: snapId,
+    },
+  });
   res.json({
-    player: res.locals.player,
+    message: "score updated",
   });
 }
 
