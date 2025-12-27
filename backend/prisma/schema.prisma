@@ -23,13 +23,12 @@ model Player {
 }
 
 model ImageStatus {
-  id              Int      @id @default(autoincrement())
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  snapOneStatus   Boolean  @default(false)
-  snapTwoStatus   Boolean  @default(false)
-  snapThreeStatus Boolean  @default(false)
-  player          Player?  @relation(fields: [playerId], references: [id])
-  playerId        Int?
-  imageId         Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  snapId    Int?
+  player    Player?  @relation(fields: [playerId], references: [id])
+  playerId  Int
+  imageId   Int
+
+  @@id([playerId, imageId])
 }
