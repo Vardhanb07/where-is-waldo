@@ -3,12 +3,17 @@ import client from "../db/client";
 import type { addNewPlayerBodyTypes } from "../utils/types";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import * as z from "zod";
 
 dotenv.config({ quiet: true });
 
+const envSchema = z.object({
+  key: z.string().min(1),
+});
+
 async function sendAllPlayersData(req: Request, res: Response) {
   const allPlayers = await client.player.findMany();
-  res.status(200).json({
+  res.json({
     allPlayers: allPlayers,
   });
 }
@@ -21,26 +26,32 @@ async function sendPlayerData(req: Request, res: Response) {
       id: playerId,
     },
   });
-  res.status(200).json({
+  res.json({
     playerData: playerData,
   });
 }
 
 async function addNewPlayer(req: Request, res: Response) {
-  let { username, score }: addNewPlayerBodyTypes = req.body;
-  if (score === undefined) score = 0;
+  let { username }: addNewPlayerBodyTypes = req.body;
   const player = await client.player.create({
     data: {
       username: username,
-      score: score,
+      score: 0,
     },
   });
-  const key = process.env.JWT_KEY;
-  let playerToken = null;
-  if (key) {
-    playerToken = jwt.sign({ player: player }, key);
+  const playerId = player["id"];
+  const numberOfImages = 3;
+  for (let i = 1; i <= numberOfImages; i++) {
+    await client.imageStatus.create({
+      data: {
+        playerId: playerId,
+        imageId: i,
+      },
+    });
   }
-  res.status(201).json({
+  const { key } = envSchema.parse(process.env);
+  const playerToken = jwt.sign({ player: player }, key);
+  res.json({
     playerToken: playerToken,
   });
 }
