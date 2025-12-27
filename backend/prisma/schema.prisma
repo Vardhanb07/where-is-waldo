@@ -31,4 +31,5 @@ model ImageStatus {
   snapThreeStatus Boolean  @default(false)
   player          Player?  @relation(fields: [playerId], references: [id])
   playerId        Int?
+  imageId         Int?
 }
