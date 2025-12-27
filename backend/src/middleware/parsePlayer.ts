@@ -32,11 +32,6 @@ async function parse(req: Request, res: Response, next: NextFunction) {
   const { token } = resLocalsSchema.parse(res.locals);
   const { player } = jwtDecodedSchema.parse(jwt.verify(token, JWT_KEY));
   const { id, username, score } = playerSchema.parse(player);
-  const playerData = await client.player.findUnique({
-    where: {
-      id: id,
-    },
-  });
   res.locals.player = {
     id: id,
     username: username,
@@ -45,4 +40,4 @@ async function parse(req: Request, res: Response, next: NextFunction) {
   next();
 }
 
-export default asyncHandler(parse);
+export default parse;
