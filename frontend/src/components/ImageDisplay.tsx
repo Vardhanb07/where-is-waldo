@@ -34,8 +34,6 @@ export default function ImageDisplay({
           setShowTooltip(false);
         }}
         onClick={(e) => {
-          console.log("component: ImageDisplay");
-          console.log(`x: ${e.pageX}, y: ${e.pageY}`);
           setMouseClickPosition({
             ...mouseClickPosition,
             x: e.pageX,

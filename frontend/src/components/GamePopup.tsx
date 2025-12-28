@@ -5,6 +5,7 @@ import ImageToBeFound from "./ImageToBeFound";
 import { checkPositions } from "../utils/checkPositions";
 import closeLightModeImage from "../assets/images/theme-images/close_light_mode.svg";
 import closeDarkModeImage from "../assets/images/theme-images/close_dark_mode.svg";
+import instance from "../utils/api";
 
 export default function GamePopup({
   showGamePopup,
@@ -12,12 +13,12 @@ export default function GamePopup({
   className,
   imageId,
   setShowIncorrectMatchPopup,
-  mouseClickPosition
+  mouseClickPosition,
 }: GamePopupPropTypes) {
   const { getImagesToBeFound } = useGetImagesToBeFound();
   const toFindImages = getImagesToBeFound(imageId);
   const { x, y } = mouseClickPosition;
-  const { incrementScore } = useScore();
+  const { score, incrementScore } = useScore();
   const { theme } = useTheme();
   useEffect(() => {
     if (showGamePopup) {
@@ -26,6 +27,22 @@ export default function GamePopup({
       }, 20000);
     }
   }, []);
+  const playerToken = localStorage.getItem("player-token");
+  async function sendUpdateRequest(snapId: number): Promise<void> {
+    await instance.put(
+      "/player",
+      {
+        score: score + 1,
+        imageId: imageId,
+        snapId: snapId,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${playerToken}`,
+        },
+      }
+    );
+  }
   return (
     <div className={`fixed right-3/7 top-1/9 border p-4 text-xl ${className}`}>
       <div className="flex flex-row gap-3 items-center mb-1">
@@ -50,10 +67,9 @@ export default function GamePopup({
               image={src}
               key={index}
               onClick={() => {
-                console.log("component: GamePopup");
-                console.log(`x: ${x}, y: ${y}`);
                 if (checkPositions(imageId, index, x, y)) {
                   incrementScore();
+                  sendUpdateRequest(index + 1);
                 } else {
                   setShowIncorrectMatchPopup(true);
                 }
