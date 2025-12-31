@@ -14,21 +14,19 @@ datasource db {
 }
 
 model Player {
-  id          Int           @id @default(autoincrement())
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  username    String        @db.VarChar(64)
-  score       Int
-  imageStatus ImageStatus[]
+  id            Int           @id @default(autoincrement())
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  username      String        @db.VarChar(64)
+  score         Int           @default(0)
+  imageStatuses ImageStatus[]
 }
 
 model ImageStatus {
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  snapId    Int?
-  player    Player?  @relation(fields: [playerId], references: [id])
-  playerId  Int
-  imageId   Int
-
-  @@id([playerId, imageId])
+  id             Int      @id @default(autoincrement())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  completedSnaps Json
+  player         Player   @relation(fields: [playerId], references: [id])
+  playerId       Int
 }
