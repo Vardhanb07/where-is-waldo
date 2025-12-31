@@ -3,6 +3,7 @@ import type { NextFunction, Request, Response } from "express";
 import cors from "cors";
 import playerRouter from "./routes/playerRouter";
 import leaderboardRouter from "./routes/leaderboardRouter";
+import progressRouter from "./routes/progressRouter";
 import dotenv from "dotenv";
 
 dotenv.config({ quiet: true });
@@ -24,6 +25,7 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use("/player", playerRouter);
 app.use("/leaderboard", leaderboardRouter);
+app.use("/progress", progressRouter);
 
 app.use((req: Request, res: Response) => {
   res.status(404).json({

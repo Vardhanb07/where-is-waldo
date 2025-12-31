@@ -3,7 +3,6 @@ import {
   sendAllPlayersData,
   sendPlayerData,
   addNewPlayer,
-  updatePlayerProcess,
 } from "../controllers/playerController";
 import protect from "../middleware/protectRoute";
 import asyncHandler from "express-async-handler";
@@ -17,6 +16,5 @@ playerRouter.use(protect);
 playerRouter.use(parse);
 playerRouter.get("/", asyncHandler(sendAllPlayersData));
 playerRouter.get("/:id", asyncHandler(sendPlayerData));
-playerRouter.put("/", asyncHandler(updatePlayerProcess));
 
 export default playerRouter;

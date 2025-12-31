@@ -16,7 +16,7 @@ const playerSchema = z.object({
   createdAt: z.iso.datetime(),
   updatedAt: z.iso.datetime(),
   username: z.string().min(1),
-  score: z.number().gte(0),
+  score: z.number(),
 });
 
 const jwtDecodedSchema = z.object({

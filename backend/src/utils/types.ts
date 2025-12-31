@@ -9,3 +9,7 @@ export interface addNewPlayerBodyTypes {
   score: number;
   imageStatus: imageStatusType[];
 }
+
+export interface completedSnapsType {
+  [index: string]: boolean;
+}
