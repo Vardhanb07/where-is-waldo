@@ -59,7 +59,7 @@ async function updatePlayerProgress(req: Request, res: Response) {
     },
   });
   res.json({
-    message: "player progressed updated!",
+    message: "player progress updated!",
   });
 }
 

@@ -1,6 +1,5 @@
 import { Router } from "express";
 import {
-  sendAllPlayersData,
   sendPlayerData,
   addNewPlayer,
 } from "../controllers/playerController";
@@ -14,7 +13,6 @@ playerRouter.post("/", asyncHandler(addNewPlayer));
 
 playerRouter.use(protect);
 playerRouter.use(parse);
-playerRouter.get("/", asyncHandler(sendAllPlayersData));
-playerRouter.get("/:id", asyncHandler(sendPlayerData));
+playerRouter.get("/", asyncHandler(sendPlayerData));
 
 export default playerRouter;

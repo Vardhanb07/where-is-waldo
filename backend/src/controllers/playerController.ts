@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import client from "../db/client";
-import type { addNewPlayerBodyTypes } from "../utils/types";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import * as z from "zod";
@@ -11,19 +10,22 @@ const envSchema = z.object({
   JWT_KEY: z.string().min(1),
 });
 
-async function sendAllPlayersData(req: Request, res: Response) {
-  const allPlayers = await client.player.findMany();
-  res.json({
-    players: allPlayers,
-  });
-}
+const playerSchema = z.object({
+  id: z.number(),
+  username: z.string().min(1),
+  score: z.number(),
+});
+
+const resLocalsSchema = z.object({
+  player: playerSchema,
+});
 
 async function sendPlayerData(req: Request, res: Response) {
-  const { id } = req.params;
-  const playerId = parseInt(id);
+  const { player } = resLocalsSchema.parse(res.locals);
+  const { id } = playerSchema.parse(player);
   const playerData = await client.player.findUnique({
     where: {
-      id: playerId,
+      id: id,
     },
   });
   res.json({
@@ -32,7 +34,10 @@ async function sendPlayerData(req: Request, res: Response) {
 }
 
 async function addNewPlayer(req: Request, res: Response) {
-  const { username }: addNewPlayerBodyTypes = req.body;
+  const reqBodySchema = z.object({
+    username: z.string(),
+  });
+  const { username } = reqBodySchema.parse(req.body);
   const player = await client.player.create({
     data: {
       username: username,
@@ -42,9 +47,9 @@ async function addNewPlayer(req: Request, res: Response) {
   const numberOfImages = 4;
   const playerId = player["id"];
   const completedSnaps = {
+    0: false,
     1: false,
     2: false,
-    3: false,
   };
   for (let i = 0; i < numberOfImages; i++) {
     await client.imageStatus.create({
@@ -58,8 +63,7 @@ async function addNewPlayer(req: Request, res: Response) {
   const playerToken = jwt.sign({ player: player }, JWT_KEY);
   res.json({
     playerToken: playerToken,
-    playerId: playerId,
   });
 }
 
-export { sendAllPlayersData, sendPlayerData, addNewPlayer };
+export { sendPlayerData, addNewPlayer };
