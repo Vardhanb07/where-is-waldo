@@ -82,3 +82,28 @@ export interface PositionsType {
 export interface ScoreProviderPropTypes {
   children: React.ReactNode;
 }
+
+export interface GameProgressProviderPropTypes {
+  children: React.ReactNode;
+}
+
+export interface GameProgressContextTypes {
+  currentCompletedImages: number[];
+  currentCompletedSnapsOfImages: number[][];
+  updateCurrentCompletedImages: (imageId: number) => void;
+  updateCurrentCompletedSnapsOfImages: (
+    imageId: number,
+    snapId: number
+  ) => void;
+}
+
+export type completedSnaps = { [index: string]: boolean };
+
+export interface playerProgressType {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  completedSnaps: completedSnaps;
+  playerId: number;
+  imageId: number;
+}

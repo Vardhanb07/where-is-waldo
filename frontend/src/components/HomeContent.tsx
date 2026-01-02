@@ -10,10 +10,13 @@ const imageNames = [
 export default function HomeContent() {
   return (
     <div className="flex flex-col p-3 font-jbmono">
-      <p className="text-xl text-center mb-3">Choose a image and start playing!</p>
+      <p className="text-xl text-center mb-3">
+        Choose a image and start playing!
+      </p>
       {imageNames.map((imageName, index) => {
-        index++;
-        return <ImagePreview imageName={imageName} id={index} key={index} />;
+        return (
+          <ImagePreview imageName={imageName} id={index + 1} key={index + 1} />
+        );
       })}
     </div>
   );

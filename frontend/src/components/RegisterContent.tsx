@@ -11,7 +11,6 @@ export default function RegisterContent() {
   const [error, setError] = useState("");
   const responseSchema = z.object({
     playerToken: z.string().min(1),
-    playerId: z.number(),
   });
   const formSchema = z.object({
     playerUsername: z.string().min(1),
@@ -32,11 +31,8 @@ export default function RegisterContent() {
             const response = await instance.post("/player", {
               username: playerUsername,
             });
-            const { playerToken, playerId } = responseSchema.parse(
-              response.data
-            );
+            const { playerToken } = responseSchema.parse(response.data);
             localStorage.setItem("player-token", playerToken);
-            localStorage.setItem("player-id", String(playerId));
             navigate("/");
           } catch (err: unknown) {
             setShowPopup(true);

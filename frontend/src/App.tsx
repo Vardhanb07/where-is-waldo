@@ -9,6 +9,7 @@ import Leaderboard from "./pages/Leaderboard";
 import ProtectRoute from "./components/ProtectRoute";
 import Register from "./pages/Register";
 import ScoreProvider from "./providers/ScoreProvider";
+import GameProgressProvider from "./providers/GameProgressProvider";
 
 export function AppRouter() {
   return (
@@ -35,9 +36,11 @@ export default function App() {
       <ImageProvider>
         <ImagesToBeFoundProvider>
           <ScoreProvider>
-            <BrowserRouter>
-              <AppRouter />
-            </BrowserRouter>
+            <GameProgressProvider>
+              <BrowserRouter>
+                <AppRouter />
+              </BrowserRouter>
+            </GameProgressProvider>
           </ScoreProvider>
         </ImagesToBeFoundProvider>
       </ImageProvider>

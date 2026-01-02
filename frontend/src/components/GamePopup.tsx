@@ -30,7 +30,7 @@ export default function GamePopup({
   const playerToken = localStorage.getItem("player-token");
   async function sendUpdateRequest(snapId: number): Promise<void> {
     await instance.put(
-      "/player",
+      "/progress",
       {
         score: score + 1,
         imageId: imageId,
@@ -69,7 +69,7 @@ export default function GamePopup({
               onClick={() => {
                 if (checkPositions(imageId, index, x, y)) {
                   incrementScore();
-                  sendUpdateRequest(index + 1);
+                  sendUpdateRequest(index);
                 } else {
                   setShowIncorrectMatchPopup(true);
                 }
