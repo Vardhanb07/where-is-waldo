@@ -29,4 +29,5 @@ model ImageStatus {
   completedSnaps Json
   player         Player   @relation(fields: [playerId], references: [id])
   playerId       Int
+  imageId        Int
 }
