@@ -56,6 +56,7 @@ async function addNewPlayer(req: Request, res: Response) {
       data: {
         playerId: playerId,
         completedSnaps: completedSnaps,
+        imageId: i,
       },
     });
   }
