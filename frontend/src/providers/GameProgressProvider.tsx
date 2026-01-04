@@ -1,39 +1,108 @@
-import { useState } from "react";
-import {
-  GameProgressContext,
-  completedImages,
-  completedSnapsOfImages,
-} from "../context/GameProgressContext";
-import type { GameProgressProviderPropTypes } from "../utils/types";
+import { useEffect, useState } from "react";
+import { GameProgressContext } from "../context/GameProgressContext";
+import type {
+  GameProgressProviderPropTypes,
+  playerProgressType,
+} from "../utils/types";
+import instance from "../utils/api";
 
-export function GameProgressProvider({
+export default function GameProgressProvider({
   children,
 }: GameProgressProviderPropTypes) {
-  const [currentCompletedImages, setCurrentCompletedImages] =
-    useState(completedImages);
-  const [currentCompletedSnapsOfImages, setCurrentCompletedSnapsOfImages] =
-    useState(completedSnapsOfImages);
+  const [currentNotCompletedImages, setCurrentNotCompletedImages] = useState<
+    number[]
+  >([1, 2, 3, 4]);
+  const [
+    currentNotCompletedSnapsOfImages,
+    setCurrentNotCompletedSnapsOfImages,
+  ] = useState<number[][]>([
+    [1, 2, 3],
+    [1, 2, 3],
+    [1, 2, 3],
+    [1, 2, 3],
+  ]);
 
-  const updateCurrentCompletedImages = (imageId: number) => {
-    const images = currentCompletedImages;
-    images.push(imageId);
-    setCurrentCompletedImages(images);
+  useEffect(() => {
+    async function getPlayerProgress(): Promise<playerProgressType[] | null> {
+      const playerToken = localStorage.getItem("player-token");
+      if (playerToken) {
+        try {
+          const response = await instance.get("/progress", {
+            headers: {
+              Authorization: `Bearer ${playerToken}`,
+            },
+          });
+          return response.data.progress;
+        } catch (err: unknown) {
+          return null;
+        }
+      }
+      return null;
+    }
+    async function getAllNotCompletedImages(): Promise<number[] | null> {
+      const playerProgress = await getPlayerProgress();
+      if (!playerProgress) return null;
+      const images: number[] = [];
+      for (let i = 0; i < playerProgress.length; i++) {
+        if (
+          !(
+            playerProgress[i]["completedSnaps"]["0"] &&
+            playerProgress[i]["completedSnaps"]["1"] &&
+            playerProgress[i]["completedSnaps"]["2"]
+          )
+        )
+          images.push(i + 1);
+      }
+      return images;
+    }
+    async function getAllNotCompletedSnapsOfImages(): Promise<
+      number[][] | null
+    > {
+      const playerProgress = await getPlayerProgress();
+      if (!playerProgress) return null;
+      const snaps: number[][] = [];
+      for (let i = 0; i < playerProgress.length; i++) {
+        const x: number[] = [];
+        if (!playerProgress[i]["completedSnaps"]["0"]) x.push(1);
+        if (!playerProgress[i]["completedSnaps"]["1"]) x.push(2);
+        if (!playerProgress[i]["completedSnaps"]["2"]) x.push(3);
+        snaps.push(x);
+      }
+      return snaps;
+    }
+    async function assignValues(): Promise<void> {
+      const images = await getAllNotCompletedImages();
+      const snaps = await getAllNotCompletedSnapsOfImages();
+      setCurrentNotCompletedImages(images ?? currentNotCompletedImages);
+      setCurrentNotCompletedSnapsOfImages(
+        snaps ?? currentNotCompletedSnapsOfImages
+      );
+    }
+    assignValues();
+  }, []);
+
+  const updateCurrentNotCompletedImages = (imageId: number) => {
+    let images = currentNotCompletedImages;
+    images = images.filter((image) => image !== imageId);
+    setCurrentNotCompletedImages(images);
   };
-  const updateCurrentCompletedSnapsOfImages = (
+
+  const updateCurrentNotCompletedSnapsOfImages = (
     imageId: number,
     snapId: number
   ) => {
-    const snapsOfImages = currentCompletedSnapsOfImages;
-    snapsOfImages[imageId - 1].push(snapId);
-    setCurrentCompletedSnapsOfImages(snapsOfImages);
+    let snaps = currentNotCompletedSnapsOfImages;
+    snaps[imageId - 1] = snaps[imageId - 1].filter((snap) => snap !== snapId);
+    setCurrentNotCompletedSnapsOfImages(snaps);
   };
+
   return (
     <GameProgressContext
       value={{
-        currentCompletedImages,
-        currentCompletedSnapsOfImages,
-        updateCurrentCompletedImages,
-        updateCurrentCompletedSnapsOfImages,
+        currentNotCompletedImages,
+        currentNotCompletedSnapsOfImages,
+        updateCurrentNotCompletedImages,
+        updateCurrentNotCompletedSnapsOfImages,
       }}
     >
       {children}
