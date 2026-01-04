@@ -88,10 +88,10 @@ export interface GameProgressProviderPropTypes {
 }
 
 export interface GameProgressContextTypes {
-  currentCompletedImages: number[];
-  currentCompletedSnapsOfImages: number[][];
-  updateCurrentCompletedImages: (imageId: number) => void;
-  updateCurrentCompletedSnapsOfImages: (
+  currentNotCompletedImages: number[];
+  currentNotCompletedSnapsOfImages: number[][];
+  updateCurrentNotCompletedImages: (imageId: number) => void;
+  updateCurrentNotCompletedSnapsOfImages: (
     imageId: number,
     snapId: number
   ) => void;
