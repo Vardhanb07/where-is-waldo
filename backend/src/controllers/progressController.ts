@@ -47,7 +47,7 @@ async function updatePlayerProgress(req: Request, res: Response) {
       playerId: id,
     },
   });
-  const requiredImage = images.find((image) => image.imageId === imageId - 1);
+  const requiredImage = images.find((image) => image.imageId === imageId);
   let newCompletedSnaps = requiredImage?.completedSnaps as completedSnapsType;
   newCompletedSnaps[snapId.toString()] = true;
   await client.imageStatus.update({
