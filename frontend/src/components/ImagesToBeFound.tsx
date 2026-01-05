@@ -1,16 +1,21 @@
 import type { ImagesToBeFoundPropTypes } from "../utils/types";
-import { useGetImagesToBeFound } from "../utils/hooks";
+import { useGetImagesToBeFound, useGameProgress } from "../utils/hooks";
 import ImageToBeFound from "./ImageToBeFound";
 
 export default function ImagesToBeFound({
   parentImageId,
 }: ImagesToBeFoundPropTypes) {
   const { getImagesToBeFound } = useGetImagesToBeFound();
+  const { currentNotCompletedSnapsOfImages } = useGameProgress();
   const images = getImagesToBeFound(parentImageId);
   return (
     <div className="flex-1 flex gap-2">
       {images.map((image, index) => {
-        return <ImageToBeFound key={index} image={image} />;
+        return (
+          currentNotCompletedSnapsOfImages[parentImageId - 1].includes(
+            index + 1
+          ) && <ImageToBeFound key={index} image={image} />
+        );
       })}
     </div>
   );

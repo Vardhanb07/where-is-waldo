@@ -64,6 +64,7 @@ export interface GamePopupPropTypes {
   className?: string;
   imageId: number;
   setShowIncorrectMatchPopup: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowErrorPopup: React.Dispatch<React.SetStateAction<boolean>>;
   mouseClickPosition: {
     x: number;
     y: number;

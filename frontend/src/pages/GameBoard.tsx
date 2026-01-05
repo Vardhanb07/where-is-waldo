@@ -23,6 +23,7 @@ export default function GameBoard() {
 
   const [showGamePopup, setShowGamePopup] = useState(false);
   const [showIncorrectMatchPopup, setShowIncorrectMatchPopup] = useState(false);
+  const [showErrorPopup, setShowErrorPopup] = useState(false);
   const [mouseClickPosition, setMouseClickPosition] = useState({
     x: 0,
     y: 0,
@@ -54,6 +55,7 @@ export default function GameBoard() {
           imageId={imageId}
           setShowIncorrectMatchPopup={setShowIncorrectMatchPopup}
           mouseClickPosition={mouseClickPosition}
+          setShowErrorPopup={setShowErrorPopup}
         />
       )}
       {showIncorrectMatchPopup && (
@@ -61,6 +63,18 @@ export default function GameBoard() {
           content="Incorrect match!"
           showPopup={showIncorrectMatchPopup}
           setShowPopup={setShowIncorrectMatchPopup}
+          className={`${
+            theme === "dark"
+              ? "bg-gray-950 text-white selection:bg-white selection:text-black"
+              : "bg-white text-black selection:bg-black selection:text-white"
+          } font-jbmono`}
+        />
+      )}
+      {showErrorPopup && (
+        <Popup
+          content="Something went wrong, Please try again!"
+          showPopup={showErrorPopup}
+          setShowPopup={setShowErrorPopup}
           className={`${
             theme === "dark"
               ? "bg-gray-950 text-white selection:bg-white selection:text-black"

@@ -1,6 +1,11 @@
 import { useEffect } from "react";
 import type { GamePopupPropTypes } from "../utils/types";
-import { useGetImagesToBeFound, useTheme, useScore } from "../utils/hooks";
+import {
+  useGetImagesToBeFound,
+  useTheme,
+  useScore,
+  useGameProgress,
+} from "../utils/hooks";
 import ImageToBeFound from "./ImageToBeFound";
 import { checkPositions } from "../utils/checkPositions";
 import closeLightModeImage from "../assets/images/theme-images/close_light_mode.svg";
@@ -14,12 +19,18 @@ export default function GamePopup({
   imageId,
   setShowIncorrectMatchPopup,
   mouseClickPosition,
+  setShowErrorPopup,
 }: GamePopupPropTypes) {
   const { getImagesToBeFound } = useGetImagesToBeFound();
   const toFindImages = getImagesToBeFound(imageId);
   const { x, y } = mouseClickPosition;
   const { score, incrementScore } = useScore();
   const { theme } = useTheme();
+  const {
+    updateCurrentNotCompletedImages,
+    updateCurrentNotCompletedSnapsOfImages,
+    currentNotCompletedSnapsOfImages,
+  } = useGameProgress();
   useEffect(() => {
     if (showGamePopup) {
       setTimeout(() => {
@@ -69,7 +80,16 @@ export default function GamePopup({
               onClick={() => {
                 if (checkPositions(imageId, index, x, y)) {
                   incrementScore();
-                  sendUpdateRequest(index);
+                  try {
+                    sendUpdateRequest(index);
+                    updateCurrentNotCompletedSnapsOfImages(imageId, index + 1);
+                    if (
+                      currentNotCompletedSnapsOfImages[imageId - 1].length == 3
+                    )
+                      updateCurrentNotCompletedImages(imageId);
+                  } catch (err: unknown) {
+                    setShowErrorPopup(true);
+                  }
                 } else {
                   setShowIncorrectMatchPopup(true);
                 }
