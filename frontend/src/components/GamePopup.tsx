@@ -15,11 +15,11 @@ import instance from "../utils/api";
 export default function GamePopup({
   showGamePopup,
   setShowGamePopup,
-  className,
   imageId,
   setShowIncorrectMatchPopup,
   mouseClickPosition,
   setShowErrorPopup,
+  setShowCorrectPopup,
 }: GamePopupPropTypes) {
   const { getImagesToBeFound } = useGetImagesToBeFound();
   const toFindImages = getImagesToBeFound(imageId);
@@ -54,8 +54,15 @@ export default function GamePopup({
       }
     );
   }
+  console.log(currentNotCompletedSnapsOfImages);
   return (
-    <div className={`fixed right-3/7 top-1/9 border p-4 text-xl ${className}`}>
+    <div
+      className={`fixed right-3/7 top-1/9 border p-4 text-xl ${
+        theme === "dark"
+          ? "bg-gray-950 text-white selection:bg-white selection:text-black"
+          : "bg-white text-black selection:bg-black selection:text-white"
+      } font-jbmono`}
+    >
       <div className="flex flex-row gap-3 items-center mb-1">
         <div
           className="flex h-8 w-8 cursor-pointer hover:border"
@@ -74,29 +81,38 @@ export default function GamePopup({
       <div className="flex gap-3">
         {toFindImages.map((src, index) => {
           return (
-            <ImageToBeFound
-              image={src}
-              key={index}
-              onClick={() => {
-                if (checkPositions(imageId, index, x, y)) {
-                  incrementScore();
-                  try {
-                    sendUpdateRequest(index);
-                    updateCurrentNotCompletedSnapsOfImages(imageId, index + 1);
-                    if (
-                      currentNotCompletedSnapsOfImages[imageId - 1].length == 3
-                    )
-                      updateCurrentNotCompletedImages(imageId);
-                  } catch (err: unknown) {
-                    setShowErrorPopup(true);
+            currentNotCompletedSnapsOfImages[imageId - 1].includes(
+              index + 1
+            ) && (
+              <ImageToBeFound
+                image={src}
+                key={index}
+                onClick={() => {
+                  if (checkPositions(imageId, index, x, y)) {
+                    try {
+                      sendUpdateRequest(index);
+                      updateCurrentNotCompletedSnapsOfImages(
+                        imageId,
+                        index + 1
+                      );
+                      incrementScore();
+                      setShowCorrectPopup(true);
+                      if (
+                        currentNotCompletedSnapsOfImages[imageId - 1].length ==
+                        0
+                      )
+                        updateCurrentNotCompletedImages(imageId);
+                    } catch (err: unknown) {
+                      setShowErrorPopup(true);
+                    }
+                  } else {
+                    setShowIncorrectMatchPopup(true);
                   }
-                } else {
-                  setShowIncorrectMatchPopup(true);
-                }
-                setShowGamePopup(false);
-              }}
-              className="hover:border-2"
-            />
+                  setShowGamePopup(false);
+                }}
+                className="hover:border-2"
+              />
+            )
           );
         })}
       </div>

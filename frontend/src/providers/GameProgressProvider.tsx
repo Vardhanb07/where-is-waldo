@@ -61,6 +61,7 @@ export default function GameProgressProvider({
       const playerProgress = await getPlayerProgress();
       if (!playerProgress) return null;
       const snaps: number[][] = [];
+      playerProgress.sort((a, b) => a.imageId - b.imageId);
       for (let i = 0; i < playerProgress.length; i++) {
         const x: number[] = [];
         if (!playerProgress[i]["completedSnaps"]["0"]) x.push(1);
@@ -92,7 +93,9 @@ export default function GameProgressProvider({
     snapId: number
   ) => {
     let snaps = currentNotCompletedSnapsOfImages;
-    snaps[imageId - 1] = snaps[imageId - 1].filter((snap) => snap !== snapId);
+    snaps[imageId - 1] = snaps[imageId - 1].filter(
+      (snap) => snap !== snapId - 1
+    );
     setCurrentNotCompletedSnapsOfImages(snaps);
   };
 

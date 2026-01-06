@@ -24,6 +24,7 @@ export default function GameBoard() {
   const [showGamePopup, setShowGamePopup] = useState(false);
   const [showIncorrectMatchPopup, setShowIncorrectMatchPopup] = useState(false);
   const [showErrorPopup, setShowErrorPopup] = useState(false);
+  const [showCorrectMatch, setShowCorrectMatch] = useState(false);
   const [mouseClickPosition, setMouseClickPosition] = useState({
     x: 0,
     y: 0,
@@ -45,17 +46,13 @@ export default function GameBoard() {
       />
       {showGamePopup && (
         <GamePopup
-          className={`${
-            theme === "dark"
-              ? "bg-gray-950 text-white selection:bg-white selection:text-black"
-              : "bg-white text-black selection:bg-black selection:text-white"
-          } font-jbmono`}
           showGamePopup={showGamePopup}
           setShowGamePopup={setShowGamePopup}
           imageId={imageId}
           setShowIncorrectMatchPopup={setShowIncorrectMatchPopup}
           mouseClickPosition={mouseClickPosition}
           setShowErrorPopup={setShowErrorPopup}
+          setShowCorrectPopup={setShowCorrectMatch}
         />
       )}
       {showIncorrectMatchPopup && (
@@ -63,11 +60,6 @@ export default function GameBoard() {
           content="Incorrect match!"
           showPopup={showIncorrectMatchPopup}
           setShowPopup={setShowIncorrectMatchPopup}
-          className={`${
-            theme === "dark"
-              ? "bg-gray-950 text-white selection:bg-white selection:text-black"
-              : "bg-white text-black selection:bg-black selection:text-white"
-          } font-jbmono`}
         />
       )}
       {showErrorPopup && (
@@ -75,11 +67,13 @@ export default function GameBoard() {
           content="Something went wrong, Please try again!"
           showPopup={showErrorPopup}
           setShowPopup={setShowErrorPopup}
-          className={`${
-            theme === "dark"
-              ? "bg-gray-950 text-white selection:bg-white selection:text-black"
-              : "bg-white text-black selection:bg-black selection:text-white"
-          } font-jbmono`}
+        />
+      )}
+      {showCorrectMatch && (
+        <Popup
+          content="Correct match!"
+          showPopup={showCorrectMatch}
+          setShowPopup={setShowCorrectMatch}
         />
       )}
     </div>

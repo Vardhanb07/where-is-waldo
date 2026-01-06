@@ -8,7 +8,6 @@ export default function Popup({
   content,
   showPopup,
   setShowPopup,
-  className,
 }: PopupPropTypes) {
   useEffect(() => {
     if (showPopup) {
@@ -20,7 +19,11 @@ export default function Popup({
   const { theme } = useTheme();
   return (
     <div
-      className={`fixed right-1/10 bottom-1/7 border p-4 text-xl ${className}`}
+      className={`fixed right-1/10 bottom-1/7 border p-4 text-xl font-jbmono ${
+        theme === "dark"
+          ? "bg-gray-950 text-white selection:bg-white selection:text-black"
+          : "bg-white text-black selection:bg-black selection:text-white"
+      }`}
     >
       <div className="flex flex-row gap-3 items-center">
         <div

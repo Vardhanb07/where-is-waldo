@@ -55,16 +55,15 @@ export interface PopupPropTypes {
   content: string;
   showPopup: boolean;
   setShowPopup: React.Dispatch<React.SetStateAction<boolean>>;
-  className?: string;
 }
 
 export interface GamePopupPropTypes {
   showGamePopup: boolean;
   setShowGamePopup: React.Dispatch<React.SetStateAction<boolean>>;
-  className?: string;
   imageId: number;
   setShowIncorrectMatchPopup: React.Dispatch<React.SetStateAction<boolean>>;
   setShowErrorPopup: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowCorrectPopup: React.Dispatch<React.SetStateAction<boolean>>;
   mouseClickPosition: {
     x: number;
     y: number;
