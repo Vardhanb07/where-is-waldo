@@ -107,3 +107,21 @@ export interface playerProgressType {
   playerId: number;
   imageId: number;
 }
+
+export interface PlayerContentPropTypes {
+  rank: number;
+  name: string;
+  score: number;
+}
+
+export interface playerType {
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  username: string;
+  score: number;
+}
+
+export interface LeaderboardContentPropTypes {
+  content: playerType[];
+}
