@@ -2,13 +2,16 @@ import express from "express";
 import type { NextFunction, Request, Response } from "express";
 import cors from "cors";
 import playerRouter from "./routes/playerRouter";
-import leaderboardRouter from "./routes/leaderboardRouter";
 import progressRouter from "./routes/progressRouter";
+import sseRouter from "./routes/sseRouter";
 import dotenv from "dotenv";
+import EventEmitter from "events";
 
 dotenv.config({ quiet: true });
 
 const app = express();
+
+export const eventEmitter = new EventEmitter();
 
 export const corsOptions = {
   origin: process.env.ORIGIN,
@@ -24,8 +27,8 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use("/player", playerRouter);
-app.use("/leaderboard", leaderboardRouter);
 app.use("/progress", progressRouter);
+app.use("/sse", sseRouter);
 
 app.use((req: Request, res: Response) => {
   res.status(404).json({

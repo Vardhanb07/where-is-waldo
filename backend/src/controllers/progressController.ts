@@ -2,6 +2,7 @@ import type { Request, Response } from "express";
 import * as z from "zod";
 import client from "../db/client";
 import type { completedSnapsType } from "../utils/types";
+import { eventEmitter } from "../app";
 
 const playerSchema = z.object({
   id: z.number(),
@@ -47,7 +48,7 @@ async function updatePlayerProgress(req: Request, res: Response) {
       playerId: id,
     },
   });
-  const requiredImage = images.find((image) => image.imageId === imageId);
+  const requiredImage = images.find((image) => image.imageId === imageId - 1);
   let newCompletedSnaps = requiredImage?.completedSnaps as completedSnapsType;
   newCompletedSnaps[snapId.toString()] = true;
   await client.imageStatus.update({
@@ -58,6 +59,7 @@ async function updatePlayerProgress(req: Request, res: Response) {
       completedSnaps: newCompletedSnaps,
     },
   });
+  eventEmitter.emit("update");
   res.json({
     message: "player progress updated!",
   });

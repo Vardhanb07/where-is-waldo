@@ -2,8 +2,6 @@ import jwt from "jsonwebtoken";
 import * as z from "zod";
 import type { Response, Request, NextFunction } from "express";
 import dotenv from "dotenv";
-import client from "../db/client";
-import asyncHandler from "express-async-handler";
 
 dotenv.config({ quiet: true });
 
