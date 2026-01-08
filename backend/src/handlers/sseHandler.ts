@@ -1,6 +1,7 @@
-import type { Request, Response } from "express";
+import type { NextFunction, Request, Response } from "express";
 import client from "../db/client";
 import { eventEmitter } from "../app";
+import * as z from "zod";
 
 async function getLeaderboard() {
   try {
