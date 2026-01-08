@@ -8,7 +8,8 @@ export default function Leaderboard() {
   const { theme } = useTheme();
   const [leaderboard, setLeaderboard] = useState<playerType[]>([]);
   useEffect(() => {
-    const source = new EventSource("/api/sse");
+    const playerToken = localStorage.getItem("player-token");
+    const source = new EventSource(`/api/sse?token=${playerToken}`);
     source.addEventListener("message", (event) => {
       setLeaderboard(JSON.parse(event.data));
     });

@@ -24,7 +24,14 @@ export function AppRouter() {
           </ProtectRoute>
         }
       />
-      <Route path="leaderboard" element={<Leaderboard />} />
+      <Route
+        path="leaderboard"
+        element={
+          <ProtectRoute>
+            <Leaderboard />
+          </ProtectRoute>
+        }
+      />
       <Route path="*" element={<NoMatch />} />
     </Routes>
   );
