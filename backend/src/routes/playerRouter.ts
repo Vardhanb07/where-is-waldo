@@ -1,8 +1,8 @@
 import { Router } from "express";
 import asyncHandler from "express-async-handler";
-import { addNewPlayer, sendPlayerData } from "../controllers/playerController";
-import parse from "../middleware/parsePlayer";
-import protect from "../middleware/protectRoute";
+import { addNewPlayer, sendPlayerData } from "@/src/controllers/playerController";
+import parse from "@/src/middleware/parsePlayer";
+import protect from "@/src/middleware/protectRoute";
 
 const playerRouter = Router();
 

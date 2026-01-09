@@ -3,9 +3,9 @@ import cors from "cors";
 import dotenv from "dotenv";
 import type { NextFunction, Request, Response } from "express";
 import express from "express";
-import playerRouter from "./routes/playerRouter";
-import progressRouter from "./routes/progressRouter";
-import sseRouter from "./routes/sseRouter";
+import playerRouter from "@/src/routes/playerRouter";
+import progressRouter from "@/src/routes/progressRouter";
+import sseRouter from "@/src/routes/sseRouter";
 
 dotenv.config({ quiet: true });
 

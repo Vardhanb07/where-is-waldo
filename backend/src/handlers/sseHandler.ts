@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
-import { eventEmitter } from "../app";
-import client from "../db/client";
+import { eventEmitter } from "@/src/app";
+import client from "@/src/db/client";
 
 async function getLeaderboard() {
 	try {

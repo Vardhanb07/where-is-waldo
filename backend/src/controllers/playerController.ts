@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import type { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import * as z from "zod";
-import client from "../db/client";
+import client from "@/src/db/client";
 
 dotenv.config({ quiet: true });
 
