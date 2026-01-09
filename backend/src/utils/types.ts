@@ -1,3 +1,3 @@
 export interface completedSnapsType {
-  [index: string]: boolean;
+	[index: string]: boolean;
 }

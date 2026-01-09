@@ -1,11 +1,11 @@
 import { Router } from "express";
+import asyncHandler from "express-async-handler";
+import {
+	sendPlayerProgress,
+	updatePlayerProgress,
+} from "../controllers/progressController";
 import parse from "../middleware/parsePlayer";
 import protect from "../middleware/protectRoute";
-import {
-  sendPlayerProgress,
-  updatePlayerProgress,
-} from "../controllers/progressController";
-import asyncHandler from "express-async-handler";
 
 const progressRouter = Router();
 

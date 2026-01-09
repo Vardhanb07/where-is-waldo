@@ -1,7 +1,7 @@
 import { Router } from "express";
+import asyncHandler from "express-async-handler";
 import { sseHandler } from "../handlers/sseHandler";
 import protectSSE from "../middleware/protectSse";
-import asyncHandler from "express-async-handler";
 
 const sseRouter = Router();
 
