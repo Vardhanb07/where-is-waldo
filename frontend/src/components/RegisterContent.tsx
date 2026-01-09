@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import instance from "../utils/api";
-import Popup from "./Popup";
+import instance from "@/src/utils/api";
+import Popup from "@/src/components/Popup";
 import * as z from "zod";
 
 export default function RegisterContent() {

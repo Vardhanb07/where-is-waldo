@@ -1,8 +1,9 @@
-import Navbar from "../components/Navbar";
-import { useTheme } from "../utils/hooks";
-import LeaderboardContent from "../components/LeaderboardContent";
+import Navbar from "@/src/components/Navbar";
+import { useTheme } from "@/src/utils/hooks";
+import LeaderboardContent from "@/src/components/LeaderboardContent";
 import { useEffect, useState } from "react";
-import type { playerType } from "../utils/types";
+import type { playerType } from "@/src/utils/types";
+import clsx from "clsx";
 
 export default function Leaderboard() {
   const { theme } = useTheme();
@@ -22,9 +23,10 @@ export default function Leaderboard() {
   }, []);
   return (
     <div
-      className={`${
-        theme === "dark" ? "bg-gray-950 text-white" : "bg-white text-black"
-      } h-screen pt-2 font-jbmono`}
+      className={clsx("h-screen pt-2 font-jbmono", {
+        "bg-gray-950 text-white": theme === "dark",
+        "bg-white text-black": theme === "light",
+      })}
     >
       <Navbar />
       <LeaderboardContent content={leaderboard} />

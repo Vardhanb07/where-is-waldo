@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { GameProgressContext } from "../context/GameProgressContext";
+import { GameProgressContext } from "@/src/context/GameProgressContext";
 import type {
   GameProgressProviderPropTypes,
   playerProgressType,

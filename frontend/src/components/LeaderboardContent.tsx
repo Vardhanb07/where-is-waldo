@@ -1,5 +1,5 @@
-import type { LeaderboardContentPropTypes } from "../utils/types";
-import PlayerContent from "./PlayerContent";
+import type { LeaderboardContentPropTypes } from "@/src/utils/types";
+import PlayerContent from "@/src/components/PlayerContent";
 
 export default function LeaderboardContent({
   content,

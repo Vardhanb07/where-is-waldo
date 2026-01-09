@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { ScoreContext } from "../context/ScoreContext";
-import type { ScoreProviderPropTypes } from "../utils/types";
-import instance from "../utils/api";
+import { ScoreContext } from "@/src/context/ScoreContext";
+import type { ScoreProviderPropTypes } from "@/src/utils/types";
+import instance from "@/src/utils/api";
 
 export default function ScoreProvider({ children }: ScoreProviderPropTypes) {
   const [score, setScore] = useState(0);

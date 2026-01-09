@@ -1,4 +1,4 @@
-import positions from "./positions";
+import positions from "@/src/utils/positions"
 
 export function checkPositions(
   imageId: number,

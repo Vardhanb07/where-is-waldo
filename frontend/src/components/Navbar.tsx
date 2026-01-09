@@ -1,7 +1,7 @@
 import { Link } from "react-router";
-import darkModeImage from "../assets/images/theme-images/dark_mode.svg";
-import lightModeImage from "../assets/images/theme-images/light_mode.svg";
-import { useTheme, useScore } from "../utils/hooks";
+import darkModeImage from "@/src/assets/images/theme-images/dark_mode.svg";
+import lightModeImage from "@/src/assets/images/theme-images/light_mode.svg";
+import { useTheme, useScore } from "@/src/utils/hooks";
 
 export default function Navbar() {
   const { theme, changeTheme } = useTheme();

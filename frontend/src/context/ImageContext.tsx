@@ -1,8 +1,8 @@
 import { createContext } from "react";
-import spaceImg from "../assets/images/game-images/space-colony-chaos.jpg";
-import slopesImg from "../assets/images/game-images/the-ski-slopes-of-anarchy.jpg";
-import beachImg from "../assets/images/game-images/beach.jpg";
-import factoryImg from "../assets/images/game-images/factory.jpg";
+import spaceImg from "@/src/assets/images/game-images/space-colony-chaos.jpg";
+import slopesImg from "@/src/assets/images/game-images/the-ski-slopes-of-anarchy.jpg";
+import beachImg from "@/src/assets/images/game-images/beach.jpg";
+import factoryImg from "@/src/assets/images/game-images/factory.jpg";
 
 export function getImage(id: number): string {
   const images = [spaceImg, slopesImg, factoryImg, beachImg];

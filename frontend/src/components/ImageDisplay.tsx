@@ -1,7 +1,7 @@
-import type { ImageDisplayPropTypes } from "../utils/types";
-import { useGetImage } from "../utils/hooks";
+import type { ImageDisplayPropTypes } from "@/src/utils/types";
+import { useGetImage } from "@/src/utils/hooks";
 import { useState } from "react";
-import ImageTooltip from "./ImageTooltip";
+import ImageTooltip from "@/src/components/ImageTooltip";
 
 export default function ImageDisplay({
   imageId,

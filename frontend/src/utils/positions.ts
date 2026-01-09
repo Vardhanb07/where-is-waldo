@@ -1,4 +1,4 @@
-import type { PositionsType } from "./types";
+import type { PositionsType } from "@/src/utils/types"
 
 const positions: PositionsType = {
   1: {

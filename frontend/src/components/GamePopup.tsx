@@ -1,16 +1,17 @@
 import { useEffect } from "react";
-import type { GamePopupPropTypes } from "../utils/types";
+import type { GamePopupPropTypes } from "@/src/utils/types";
 import {
   useGetImagesToBeFound,
   useTheme,
   useScore,
   useGameProgress,
-} from "../utils/hooks";
-import ImageToBeFound from "./ImageToBeFound";
-import { checkPositions } from "../utils/checkPositions";
-import closeLightModeImage from "../assets/images/theme-images/close_light_mode.svg";
-import closeDarkModeImage from "../assets/images/theme-images/close_dark_mode.svg";
-import instance from "../utils/api";
+} from "@/src/utils/hooks";
+import ImageToBeFound from "@/src/components/ImageToBeFound";
+import { checkPositions } from "@/src/utils/checkPositions";
+import closeLightModeImage from "@/src/assets/images/theme-images/close_light_mode.svg";
+import closeDarkModeImage from "@/src/assets/images/theme-images/close_dark_mode.svg";
+import instance from "@/src/utils/api";
+import clsx from "clsx";
 
 export default function GamePopup({
   showGamePopup,
@@ -57,11 +58,15 @@ export default function GamePopup({
   console.log(currentNotCompletedSnapsOfImages);
   return (
     <div
-      className={`fixed right-3/7 top-1/9 border p-4 text-xl ${
-        theme === "dark"
-          ? "bg-gray-950 text-white selection:bg-white selection:text-black"
-          : "bg-white text-black selection:bg-black selection:text-white"
-      } font-jbmono`}
+      className={clsx(
+        "fixed right-3/7 top-1/9 border p-4 text-xl font-jbmono",
+        {
+          "bg-gray-950 text-white selection:bg-white selection:text-black":
+            theme === "dark",
+          "bg-white text-black selection:bg-gray-950 selection:text-white":
+            theme === "light",
+        }
+      )}
     >
       <div className="flex flex-row gap-3 items-center mb-1">
         <div
@@ -102,7 +107,7 @@ export default function GamePopup({
                         0
                       )
                         updateCurrentNotCompletedImages(imageId);
-                    } catch (err: unknown) {
+                    } catch (_err: unknown) {
                       setShowErrorPopup(true);
                     }
                   } else {

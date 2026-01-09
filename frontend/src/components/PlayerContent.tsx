@@ -1,4 +1,4 @@
-import type { PlayerContentPropTypes } from "../utils/types";
+import type { PlayerContentPropTypes } from "@/src/utils/types";
 
 export default function PlayerContent({
   rank,

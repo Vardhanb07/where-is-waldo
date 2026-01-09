@@ -1,17 +1,19 @@
-import type { ImagePreviewPropTypes } from "../utils/types";
-import ArrowOutwardLight from "../assets/images/nav-images/arrow-outward-dark.svg";
-import ArrowOutwardDark from "../assets/images/nav-images/arrow-outward-light.svg";
-import { useTheme } from "../utils/hooks";
+import type { ImagePreviewPropTypes } from "@/src/utils/types";
+import ArrowOutwardLight from "@/src/assets/images/nav-images/arrow-outward-dark.svg";
+import ArrowOutwardDark from "@/src/assets/images/nav-images/arrow-outward-light.svg";
+import { useTheme } from "@/src/utils/hooks";
 import { useNavigate } from "react-router";
+import clsx from "clsx";
 
 export default function ImagePreview({ imageName, id }: ImagePreviewPropTypes) {
   const { theme } = useTheme();
   const navigate = useNavigate();
   return (
     <div
-      className={`flex flex-row px-4 py-2 w-full border ${
-        theme === "dark" ? "border-white" : "border-black"
-      } m-2 hover:border-2`}
+      className={clsx("flex flex-row px-4 py-2 w-full border m-2 hover:border-2", {
+        "border-white": theme === "dark",
+        "border-black": theme === "light",
+      })}
       onClick={() => {
         navigate(`/image/${id}`);
       }}

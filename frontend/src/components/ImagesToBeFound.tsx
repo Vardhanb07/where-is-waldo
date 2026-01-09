@@ -1,6 +1,6 @@
-import type { ImagesToBeFoundPropTypes } from "../utils/types";
-import { useGetImagesToBeFound, useGameProgress } from "../utils/hooks";
-import ImageToBeFound from "./ImageToBeFound";
+import type { ImagesToBeFoundPropTypes } from "@/src/utils/types";
+import { useGetImagesToBeFound, useGameProgress } from "@/src/utils/hooks";
+import ImageToBeFound from "@/src/components/ImageToBeFound";
 
 export default function ImagesToBeFound({
   parentImageId,

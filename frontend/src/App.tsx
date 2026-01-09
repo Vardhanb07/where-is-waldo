@@ -1,15 +1,15 @@
 import { Route, Routes, BrowserRouter } from "react-router";
-import Home from "./pages/Home";
-import NoMatch from "./pages/NoMatch";
-import ThemeProvider from "./providers/ThemeProvider";
-import GameBoard from "./pages/GameBoard";
-import ImageProvider from "./providers/ImageProvider";
-import ImagesToBeFoundProvider from "./providers/ImagesToBeFoundProvider";
-import Leaderboard from "./pages/Leaderboard";
-import ProtectRoute from "./components/ProtectRoute";
-import Register from "./pages/Register";
-import ScoreProvider from "./providers/ScoreProvider";
-import GameProgressProvider from "./providers/GameProgressProvider";
+import Home from "@/src/pages/Home";
+import NoMatch from "@/src/pages/NoMatch";
+import ThemeProvider from "@/src/providers/ThemeProvider";
+import GameBoard from "@/src/pages/GameBoard";
+import ImageProvider from "@/src/providers/ImageProvider";
+import ImagesToBeFoundProvider from "@/src/providers/ImagesToBeFoundProvider";
+import Leaderboard from "@/src/pages/Leaderboard";
+import ProtectRoute from "@/src/components/ProtectRoute";
+import Register from "@/src/pages/Register";
+import ScoreProvider from "@/src/providers/ScoreProvider";
+import GameProgressProvider from "@/src/providers/GameProgressProvider";
 
 export function AppRouter() {
   return (

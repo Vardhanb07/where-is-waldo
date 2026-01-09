@@ -1,11 +1,12 @@
-import GameNavbar from "../components/GameNavbar";
-import { useTheme } from "../utils/hooks";
-import ImageDisplay from "../components/ImageDisplay";
+import GameNavbar from "@/src/components/GameNavbar";
+import { useTheme } from "@/src/utils/hooks";
+import ImageDisplay from "@/src/components/ImageDisplay";
 import { useParams } from "react-router";
-import NoMatch from "./NoMatch";
+import NoMatch from "@/src/pages/NoMatch";
 import { useState } from "react";
-import GamePopup from "../components/GamePopup";
-import Popup from "../components/Popup";
+import GamePopup from "@/src/components/GamePopup";
+import Popup from "@/src/components/Popup";
+import clsx from "clsx";
 
 export default function GameBoard() {
   const { theme } = useTheme();
@@ -31,11 +32,12 @@ export default function GameBoard() {
   });
   return (
     <div
-      className={`${
-        theme === "dark"
-          ? "bg-gray-950 text-white selection:bg-white selection:text-black"
-          : "bg-white text-black selection:bg-black selection:text-white"
-      } h-full pt-2 flex flex-col w-full`}
+      className={clsx(" h-full pt-2 flex flex-col w-full", {
+        "bg-gray-950 text-white selection:text-black selection:bg-white":
+          theme === "dark",
+        "bg-white text-black selection:text-white selection:bg-black":
+          theme === "light",
+      })}
     >
       <GameNavbar imageId={imageId} />
       <ImageDisplay

@@ -1,5 +1,6 @@
-import ImagePreview from "./ImagePreview";
-import { useGameProgress } from "../utils/hooks";
+import ImagePreview from "@/src/components/ImagePreview";
+import { useGameProgress } from "@/src/utils/hooks";
+
 
 const imageNames = [
   "Space Colony Chaos",

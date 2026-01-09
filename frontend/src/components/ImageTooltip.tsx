@@ -1,4 +1,4 @@
-import type { ImageTooltipPropTypes } from "../utils/types";
+import type { ImageTooltipPropTypes } from "@/src/utils/types";
 
 export default function ImageTooltip({ mousePosition }: ImageTooltipPropTypes) {
   const { x, y } = mousePosition;

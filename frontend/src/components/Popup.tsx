@@ -1,8 +1,9 @@
 import { useEffect } from "react";
-import type { PopupPropTypes } from "../utils/types";
-import { useTheme } from "../utils/hooks";
-import closeLightModeImage from "../assets/images/theme-images/close_light_mode.svg";
-import closeDarkModeImage from "../assets/images/theme-images/close_dark_mode.svg";
+import type { PopupPropTypes } from "@/src/utils/types";
+import { useTheme } from "@/src/utils/hooks";
+import closeLightModeImage from "@/src/assets/images/theme-images/close_light_mode.svg";
+import closeDarkModeImage from "@/src/assets/images/theme-images/close_dark_mode.svg";
+import clsx from "clsx";
 
 export default function Popup({
   content,
@@ -19,11 +20,15 @@ export default function Popup({
   const { theme } = useTheme();
   return (
     <div
-      className={`fixed right-1/10 bottom-1/7 border p-4 text-xl font-jbmono ${
-        theme === "dark"
-          ? "bg-gray-950 text-white selection:bg-white selection:text-black"
-          : "bg-white text-black selection:bg-black selection:text-white"
-      }`}
+      className={clsx(
+        "fixed right-1/10 bottom-1/7 border p-4 text-xl font-jbmono",
+        {
+          "bg-gray-950 text-white selection:text-black selection:bg-white":
+            theme === "dark",
+          "bg-white text-black selection:text-white selection:bg-black":
+            theme === "light",
+        }
+      )}
     >
       <div className="flex flex-row gap-3 items-center">
         <div

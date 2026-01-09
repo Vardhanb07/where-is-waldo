@@ -1,6 +1,6 @@
-import { ImagesToBeFoundContext } from "../context/ImagesToBeFoundContext";
-import { getImagesToBeFound } from "../context/ImagesToBeFoundContext";
-import type { ImageProviderPropTypes } from "../utils/types";
+import { ImagesToBeFoundContext } from "@/src/context/ImagesToBeFoundContext";
+import { getImagesToBeFound } from "@/src/context/ImagesToBeFoundContext";
+import type { ImageProviderPropTypes } from "@/src/utils/types";
 
 export default function ImagesToBeFoundProvider({
   children,

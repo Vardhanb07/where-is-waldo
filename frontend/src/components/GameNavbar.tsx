@@ -1,10 +1,10 @@
 import { Link } from "react-router";
-import darkModeImage from "../assets/images/theme-images/dark_mode.svg";
-import lightModeImage from "../assets/images/theme-images/light_mode.svg";
-import { useTheme } from "../utils/hooks";
+import darkModeImage from "@/src/assets/images/theme-images/dark_mode.svg";
+import lightModeImage from "@/src/assets/images/theme-images/light_mode.svg";
+import { useTheme } from "@/src/utils/hooks";
 import { useEffect, useState } from "react";
-import ImagesToBeFound from "./ImagesToBeFound";
-import type { GameNavbarPropTypes } from "../utils/types";
+import ImagesToBeFound from "@/src/components/ImagesToBeFound";
+import type { GameNavbarPropTypes } from "@/src/utils/types";
 
 export default function GameNavbar({ imageId }: GameNavbarPropTypes) {
   const { theme, changeTheme } = useTheme();

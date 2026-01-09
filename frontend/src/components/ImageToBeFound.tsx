@@ -1,4 +1,4 @@
-import type { ImageToBeFoundPropTypes } from "../utils/types";
+import type { ImageToBeFoundPropTypes } from "@/src/utils/types";
 
 export default function ImageToBeFound({
   image,

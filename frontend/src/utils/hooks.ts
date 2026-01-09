@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { ThemeContext } from "../context/ThemeContext";
-import { ImageContext } from "../context/ImageContext";
-import { ImagesToBeFoundContext } from "../context/ImagesToBeFoundContext";
-import { ScoreContext } from "../context/ScoreContext";
-import { GameProgressContext } from "../context/GameProgressContext";
+import { ThemeContext } from "@/src/context/ThemeContext"
+import { ImageContext } from "@/src/context/ImageContext";
+import { ImagesToBeFoundContext } from "@/src/context/ImagesToBeFoundContext";
+import { ScoreContext } from "@/src/context/ScoreContext";
+import { GameProgressContext } from "@/src/context/GameProgressContext";
 
 export function useTheme() {
   const context = useContext(ThemeContext);
